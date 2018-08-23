@@ -11,7 +11,9 @@
  */
 
 var canculatescale = function ( vector1, vector2 ) {
-    var angle
+    var value = vectorMultiplication( vector1, vector2 ) / ( canculateNorm( vector1) * canculateNorm( vector2) );
+    var angle = Math.acos( value );
+    return angle;
 }
 
 
@@ -23,7 +25,7 @@ var canculatescale = function ( vector1, vector2 ) {
  */
 
 var vectorMultiplication = function ( vector1, vector2 ) {
-    var result = vector1[ 0 ] * vector2[ 0 ] + vector1[ 1 ] * vector2[ 1 ] + vector1[ 2 ] * vector2[ 2 ];
+    var result = vector1.x * vector2.x+ vector1.y * vector2.y + vector1.z * vector2.z;
     return result;
 }
 
@@ -36,5 +38,18 @@ var vectorMultiplication = function ( vector1, vector2 ) {
  */
 
 var canculateNorm = function ( vector ) {
+    var result = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
+    return result
+}
 
+
+
+/*
+ * @functionName canculateRotateAxis
+ * @des 计算两个向量的旋转轴
+ * @param (THREE.Vector3，THREE.Vector3)
+ */
+var canculateRotateAxis = function ( vector1, vector2 ) {
+    var result = new THREE.Vector3(vector1.y * vector2.z - vector1.z * vector2.y,vector1.z * vector2.x - vector1.x * vector2.z,vector1.x * vector2.y - vector1.y * vector2.x);
+    return result;
 }
